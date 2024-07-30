@@ -1,0 +1,8 @@
+langchain-google-genai
+langchain-community 
+google-generativeai
+huggingface_hub
+Chroma
+pypdf
+pickle
+redis
