@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini-CKCB</title>
+    <link href="../static/styles.css" rel="stylesheet">
+    <style>
+        #content-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        #upload-box {
+            font-family: "Poppins", sans-serif;
+            background: #5d7a75;
+            width: 500px;
+            height: auto;
+        }
+
+        #upload-header {
+            font-family: "Poppins", sans-serif;
+            color: #212f2c;
+            font-size: 27px;
+            font-weight: 600;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 30px;
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-area {
+            border: 2px dashed #212f2c;
+            width: 450px;
+            height: 180px;
+            padding-top: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #upload-label {
+            margin-top: 20px;
+            font-family: "Poppins", sans-serif;
+            color: #212f2c;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .upload-area:hover {
+            background-color: #46635f;
+        }
+
+        #progress-bar {
+            width: 100%;
+            background-color: #ccc;
+        }
+
+        #progress {
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <p id="Logo"><img src="../static/Gemini-CKCB-Logo.png" width="150" height="150" alt="Logo"></p>
+    </div>
+
+    <div id="content-area">
+        <div id="upload-box">
+            <h1 id="upload-header">Upload your PDF file to get started</h1>
+            <div class="file-upload">
+                <form id="upload-form" method="POST" enctype="multipart/form-data">
+                    <div class="upload-area" id="uploadfile">
+                        <input type="file" name="file" id="file" accept="application/pdf" style="display:none;">
+                        <label id="upload-label" for="file">Drag and drop a file here or click to select a file<img
+                                src="../static/file-upload.png" width="150" height="150" alt="upload"></label>
+                    </div>
+                </form>
+            </div>
+            <div id="progress-bar">
+                <div id="progress">0%</div>
+            </div>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('upload-form');
+        const fileInput = document.getElementById('file');
+        const progressBar = document.getElementById('progress-bar');
+        const progress = document.getElementById('progress');
+        const output = document.getElementById('output');
+
+        var chatbotUrl = "{{ url_for('chatbot') }}";
+
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/process_upload', true);
+
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    progress.style.width = percentComplete + '%';
+                    progress.textContent = Math.round(percentComplete) + '%';
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.error) {
+                        output.innerText = 'Error: ' + response.error;
+                    } else {
+                        output.innerText = 'Upload successful!';
+                        window.location.href=chatbotUrl;
+                    }
+                } else {
+                    output.innerText = 'Error uploading file';
+                }
+                progress.style.width = '0%';
+                progress.textContent = '0%';
+            };
+
+            xhr.onerror = () => {
+                output.innerText = 'Error uploading file';
+                progress.style.width = '0%';
+                progress.textContent = '0%';
+            };
+
+            xhr.send(formData);
+        });
+    </script>
+</body>
+
+</html>

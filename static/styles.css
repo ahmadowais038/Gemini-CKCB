@@ -1,0 +1,206 @@
+body {
+    margin-left: 5px;
+    margin: 0;
+    /* Remove default margin */
+    font-family: Arial, sans-serif;
+    background-color: #2a3b38;
+    /* Optional: Set background color for the body */
+}
+
+h1 {
+    margin-top: 0;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    color: #c80a0a;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-left: 7px;
+    font-family: Tahoma;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.text {
+    margin-left: 7px;
+    font-family: Arial;
+    /*color: #151d1c;*/
+    color: aliceblue;
+    font-size: 25px;
+}
+
+#nav {
+    display: flex;
+    flex-direction: column;
+    width: 100;
+    height: 20vh;
+    background-color: #212f2c;
+    justify-items: center;
+    text-align: center;
+}
+
+#Logo {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 10vh;
+    background-color: #212f2c;
+    align-content: center;
+    justify-content: center;
+}
+
+#instruct {
+    text-align: center;
+    font-family: Tahoma;
+    color: #181c1b;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    /* Adjust height as needed */
+}
+
+.button {
+    margin-bottom: 35px;
+    /* Adjust the gap between button and bottom of the page */
+    background-color: #04AA6D;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: #45a049;
+    /* Darker green */
+}
+
+
+/* upload HTML */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+::selection{
+    color: #fff;
+    background: #6990F2;
+  }
+  .wrapper{
+    font-family: "Poppins", sans-serif;
+    width: 430px;
+    background: #5d7a75;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 7px 7px 12px rgba(0,0,0,0.05);
+  }
+  .wrapper header{
+    color: #2a3b38;
+    font-size: 27px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .wrapper form{
+    height: 167px;
+    display: flex;
+    cursor: pointer;
+    margin: 30px 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 2px dashed #2a3b38;
+  }
+  form :where(i, p){
+    color: #2a3b38;
+  }
+  form i{
+    font-size: 50px;
+  }
+  form p{
+    margin-top: 15px;
+    font-size: 16px;
+  }
+  section .row{
+    margin-bottom: 10px;
+    background: #E9F0FF;
+    list-style: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  section .row i{
+    color: #6990F2;
+    font-size: 30px;
+  }
+  section .details span{
+    font-size: 14px;
+  }
+  .progress-area .row .content{
+    width: 100%;
+    margin-left: 15px;
+  }
+  .progress-area .details{
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    justify-content: space-between;
+  }
+  .progress-area .content .progress-bar{
+    height: 6px;
+    width: 100%;
+    margin-bottom: 4px;
+    background: #fff;
+    border-radius: 30px;
+  }
+  .content .progress-bar .progress{
+    height: 100%;
+    width: 0%;
+    background: #6990F2;
+    border-radius: inherit;
+  }
+  .uploaded-area{
+    max-height: 232px;
+    overflow-y: scroll;
+  }
+  .uploaded-area.onprogress{
+    max-height: 150px;
+  }
+  .uploaded-area::-webkit-scrollbar{
+    width: 0px;
+  }
+  .uploaded-area .row .content{
+    display: flex;
+    align-items: center;
+  }
+  .uploaded-area .row .details{
+    display: flex;
+    margin-left: 15px;
+    flex-direction: column;
+  }
+  .uploaded-area .row .details .size{
+    color: #404040;
+    font-size: 11px;
+  }
+  .uploaded-area i.fa-check{
+    font-size: 16px;
+  }

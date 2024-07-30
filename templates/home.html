@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="PDF chatbot">
+    <meta name="keywords" content="Gemini, PDF, Chatbot" />
+    <meta name="author" content="Owais Ahmad" />
+    <title>Gemini-CKCB</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        body {
+            display: flex;
+            margin: 0;
+            background-color: #2a3b38;
+
+            flex-direction: column;
+            justify-content: normal;
+            align-items: normal;
+            align-content: normal;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            height: 20vh;
+            background-color: #212f2c;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            height: auto;
+            background-color: #2a3b38;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            height: 10vh;
+            background-color: #212f2c;
+            align-content: center;
+            justify-content: center;
+        }
+
+        #Logo {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            font-family: "Poppins", sans-serif;
+            color: #c80a0a;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        h2 {
+            margin-left: 7px;
+            margin-bottom: 0px;
+            font-family: Tahoma;
+            color: black;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .text {
+            margin-left: 7px;
+            margin-top: 5px;
+            width: 100vw;
+            font-family: Arial;
+            /*color: #151d1c;*/
+            color: aliceblue;
+            font-size: 18px;
+        }
+
+        #instruct {
+            margin-top: 20px;
+            text-align: center;
+            font-family: Tahoma;
+            color: #181c1b;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            align-items: center;
+            height: 80%;
+            /* Adjust height as needed */
+        }
+
+        .button {
+            margin-bottom: 35px;
+            /* Adjust the gap between button and bottom of the page */
+            background-color: #04AA6D;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+            /* Darker green */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <p id="Logo"><img src="../static/Gemini-CKCB-Logo.png" width="120" height="120" alt="Logo">
+        <h1>Gemini PDF Chatbot</h1>
+        </p>
+
+    </div>
+
+    <div class="content">
+        <h2>Project Description</h2>
+        <p class="text">This project is a personal endeavor aimed at advancing machine learning skills, particularly
+            with
+            Large Language Models (LLMs). The chatbot utilizes the Retrieval-Augmented Generation (RAG) technique,
+            Gemini API and langchain to enable seamless interaction with documents. Users may provide their
+            own PDF documents and ask questions to the chatbot based its contents.</p>
+
+        <h2>Tech Stack</h2>
+        <ul class="text">
+            <li>Python (Flask): used for developing the webapp and chat model</li>
+            <li>Gemini API: used as the LLM agent for chatbot</li>
+            <li>Langchain: Model development tools</li>
+            <li>ChromaDB: Vector database</li>
+        </ul>
+
+        <h2>System Architecture</h2>
+        <p class="text">
+            The model utilizes the RAG technique where when the user provides a document, the
+            document is split into chunks which are then converted into vector embeddings using
+            the Google's Generative AI embeddings from Langchain. these vector embeddings are then
+            stores in a ChromaDB Vector database. when the user asks a question, the vector DB
+            searches for the most relevant chunks of texts to the users question. these chunks are
+            then sent to the LLM along with the user's question so that the LLM can answer based on
+            the retrieved context. the diagram below demonstrates how this process works.
+        </p>
+        <p id="instruct">Click the button below to get started</p>
+        <div class="centered-container">
+            <button class="button" onclick="window.location.href='{{ url_for('user_upload') }}';">Get Started</button>
+        </div>
+    </div>
+
+    <div class="footer">
+
+    </div>
+</body>
+
+</html>
