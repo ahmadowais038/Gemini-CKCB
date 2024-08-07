@@ -1,8 +1,10 @@
+langchain-chroma==0.1.2
 langchain-google-genai
 langchain-community 
 google-generativeai
 huggingface_hub
-Chroma
+python-dotenv
+IPython
+Flask
 pypdf
-pickle
 redis

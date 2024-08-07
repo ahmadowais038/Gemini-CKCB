@@ -4,17 +4,18 @@ from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCateg
 
 from langchain_core.runnables import RunnablePassthrough
 from langchain.memory import ConversationBufferMemory
+from langchain_community.vectorstores import Chroma
 from langchain.document_loaders import PyPDFLoader
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser
-from langchain_chroma import Chroma
+# from langchain_chroma import Chroma
 
 from flask import Flask, request, redirect, url_for, render_template, jsonify, session
 from IPython.display import Markdown
 from model import *
 import tempfile
 import textwrap
-import pickle
+#import pickle
 import os
 
 
