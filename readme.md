@@ -1,4 +1,4 @@
-<h1><center><img src="../static/Gemini-CKCB-Logo.png" width="150" height="150" alt="Logo"></center>
+<h1><center><img src="./static/Gemini-CKCB-Logo.png" width="150" height="150" alt="Logo"></center>
 <center>Gemini PDF chatbot</center></h1>
 
 ## Project description
