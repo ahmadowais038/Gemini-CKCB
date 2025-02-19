@@ -8,11 +8,14 @@ from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCateg
 from langchain_core.runnables import RunnablePassthrough
 from langchain.memory import ConversationBufferMemory
 from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.llms import Replicate
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser
 from langchain_chroma import Chroma
 
 GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
+REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
+
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001", google_api_key=GOOGLE_API_KEY)
 
@@ -35,7 +38,6 @@ safety_settings = {
     )
 """
 
-
 def chat_model(API_KEY):
     Gemini = ChatGoogleGenerativeAI(
         model="gemini-1.5-pro",
@@ -47,7 +49,6 @@ def chat_model(API_KEY):
         max_output_tokens=5000
     )
     return Gemini
-
 
 def question_model(API_KEY):
     question_model = ChatGoogleGenerativeAI(
@@ -71,7 +72,6 @@ def question_model(API_KEY):
     )"""
 
     return question_model
-
 
 def question_chain(question_model):
     question_generator_template = """
@@ -106,7 +106,7 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 
-def response_chain(retriever, Gemini):
+def response_chain(retriever, LLM_model):
     prompt_template = """Answer the question as precise as possible using the provided context. 
         If the answer is not contained in the context, say "answer not available in context" \n\n
         Context: \n {context}?\n
@@ -119,7 +119,7 @@ def response_chain(retriever, Gemini):
     model_response_chain = (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
         | model_prompt
-        | Gemini
+        | LLM_model
         | StrOutputParser()
     )
 

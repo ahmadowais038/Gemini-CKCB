@@ -20,13 +20,13 @@ import os
 
 
 GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
+QUESTION_MODEL_KEY = os.getenv("QUESTION_MODEL_KEY")
+
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001", google_api_key=GOOGLE_API_KEY)
 
-
 Gemini = chat_model(GOOGLE_API_KEY)
-question_refiner = question_model(GOOGLE_API_KEY)
-
+question_refiner = question_model(QUESTION_MODEL_KEY)
 question_refine_chain = question_chain(question_refiner)
 
 model_objects = {}
@@ -87,7 +87,7 @@ def process_upload():
         retriever = DB.as_retriever(search_type="similarity", search_kwargs={"k": 3})
 
         memory = ConversationBufferMemory(memory_key="chat_history", input_key="question")
-        model_response_chain = response_chain(retriever, Gemini=Gemini)
+        model_response_chain = response_chain(retriever, LLM_model=Gemini)
 
         # Store the model response chain and other objects in the global variable
         model_objects['model_response_chain'] = model_response_chain

@@ -12,43 +12,62 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+        html,
         body {
-            display: flex;
+            height: 100%;
             margin: 0;
             background-color: #2a3b38;
-
-            flex-direction: column;
-            justify-content: normal;
-            align-items: normal;
-            align-content: normal;
-        }
-
-        .nav {
             display: flex;
             flex-direction: column;
-            width: auto;
-            height: 20vh;
-            background-color: #212f2c;
-            justify-items: center;
-            text-align: center;
         }
 
         .content {
-            display: flex;
-            flex-direction: column;
-            width: auto;
-            height: auto;
+            flex: 1;
+            margin: auto;
             background-color: #2a3b38;
         }
 
-        .footer {
-            display: flex;
-            flex-direction: column;
-            width: auto;
-            height: 10vh;
+        .nav {
+            height: 20vh;
             background-color: #212f2c;
-            align-content: center;
-            justify-content: center;
+        }
+
+        .footer {
+            height: 15vh;
+            position: relative;
+            background-color: #212f2c;
+        }
+
+        .personal-details {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        #github,
+        #email,
+        #linkedin {
+            margin-top: 10px;
+            flex: 1;
+            text-align: center;
+            text-justify: center;
+            font-family: Arial;
+            font-size: 18px;
+            color: aliceblue;
+            weight: bold;
+        }
+
+        #github {
+            text-align: left;
+        }
+
+        #email {
+            text-align: right;
+        }
+
+        a{
+            text-decoration: none;
         }
 
         #Logo {
@@ -66,26 +85,32 @@
         }
 
         h2 {
-            margin-left: 7px;
-            margin-bottom: 0px;
             font-family: Tahoma;
             color: black;
-            font-size: 25px;
+            font-size: 30px;
             font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        b {
+            color: #c80a0a;
+        }
+
+        ul,
+        p {
+            font-family: Arial;
+            font-size: 22px;
+            color: aliceblue;
+            margin-top: 0;
+            margin-bottom: 5px;
         }
 
         .text {
             margin-left: 7px;
-            margin-top: 5px;
-            width: 100vw;
-            font-family: Arial;
-            /*color: #151d1c;*/
-            color: aliceblue;
-            font-size: 18px;
+            word-wrap: break-word;
         }
 
         #instruct {
-            margin-top: 20px;
             text-align: center;
             font-family: Tahoma;
             color: #181c1b;
@@ -93,20 +118,11 @@
             font-weight: bold;
         }
 
-        .centered-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-            align-items: center;
-            height: 80%;
-            /* Adjust height as needed */
-        }
-
         .button {
-            margin-bottom: 35px;
             /* Adjust the gap between button and bottom of the page */
             background-color: #04AA6D;
-            /* Green */
+            margin-top: 10px;
+            margin-bottom: 20px;
             border: none;
             color: white;
             padding: 15px 32px;
@@ -123,57 +139,78 @@
             background-color: #45a049;
             /* Darker green */
         }
-
-        .content{
-            padding: 10px;
-            margin: auto;
-            word-wrap: break-word;
-        }
     </style>
 </head>
 
 <body>
     <div class="nav">
-        <p id="Logo"><img src="../static/Gemini-CKCB-Logo.png" width="120" height="120" alt="Logo">
+        <p id="Logo">
+            <center><img src="../static/Gemini-CKCB-Logo.png" width="120" height="120" alt="Logo"></center>
         <h1>Gemini PDF Chatbot</h1>
         </p>
 
     </div>
 
     <div class="content">
-        <h2>Project Description</h2>
-        <p class="text">This project is a personal endeavor aimed at advancing machine learning skills, particularly
-            with
-            Large Language Models (LLMs). The chatbot utilizes the Retrieval-Augmented Generation (RAG) technique,
-            Gemini API and langchain to enable seamless interaction with documents. Users may provide their
-            own PDF documents and ask questions to the chatbot based its contents.</p>
+        <h2 class="text">Project Description</h2>
+        <p class="text">
+            With the recent hype around Large Language model, I wanted to gain a better understanding of how they
+            worked. As such I decided to create a custom knowledge chatbot which allows users to interact with their
+            own PDF documents. The chatbot utilizes the <b>Retrieval-Augmented Generation (RAG)</b> technique in
+            conjunction with the Gemini API to enable seamless interaction with user documents. Users simply upload
+            their files, it is then processed and vectorized using Gemini embeddings and stored in a vectorDB. when
+            a user asks a question
+        </p>
 
-        <h2>Tech Stack</h2>
+        <h2 class="text">Tech Stack</h2>
         <ul class="text">
-            <li>Python (Flask): used for developing the webapp and chat model</li>
-            <li>Gemini API: used as the LLM agent for chatbot</li>
-            <li>Langchain: Model development tools</li>
-            <li>ChromaDB: Vector database</li>
+            <li>Gemini API: Gemini model was used for both the question refiner and the user chat mode. Gemini
+                embeddings were also used for the vectorDB</li>
+            <li>Python (Flask): Backend development and model</li>
+            <li>HTML, CSS, JS: front end development</li>
+            <li>Langchain: model development tools</li>
+            <li>ChromaDB: vector Database</li>
         </ul>
 
-        <h2>System Architecture</h2>
+        <h2 class="text">System Architecture</h2>
         <p class="text">
-            The model utilizes the RAG technique where when the user provides a document, the
-            document is split into chunks which are then converted into vector embeddings using
-            the Google's Generative AI embeddings from Langchain. these vector embeddings are then
-            stores in a ChromaDB Vector database. when the user asks a question, the vector DB
-            searches for the most relevant chunks of texts to the users question. these chunks are
-            then sent to the LLM along with the user's question so that the LLM can answer based on
-            the retrieved context. the diagram below demonstrates how this process works.
+            The Chatbot system utilizes the RAG technique and its architecture can be broken down into three different
+            parts: Document processing, Document retrieval, and model response. When the user uploads his document, it
+            is split into chunks of each individual page, and then using Gemini embeddings the pages are converted into
+            vector embeddings which are stored in a ChromaDB vector Database. When the user asks their question, it goes
+            through a question refine model where if the question is a standalone question, it remains as is, but if it
+            is a follow up question, the question is modified so that it can be used as a standalone question. Once this
+            is done the question is then turned into vector embedding and a semantic search of the vectorDB is done to
+            find the most relevant pages to the user question. Finally for the model response, the modified question,
+            along with the content of the relevant documents are given to the Gemini model and it will return an answer
+            based on the retrieved pages.
+
+            <center><img src="../static/System-Architecture.jpg" alt="System Architecture" width="65%" height="65%">
+            </center>
         </p>
+
         <p id="instruct">Click the button below to get started</p>
-        <div class="centered-container">
-            <button class="button" onclick="window.location.href='{{ url_for('user_upload') }}';">Get Started</button>
-        </div>
+        <center><button class="button" onclick="window.location.href='{{ url_for('user_upload') }}';">Get
+                Started</button></center>
     </div>
 
     <div class="footer">
-
+        <div class="personal-details">
+            <a href="https://www.github.com/ahmadowais038">
+                <p id="github"><img src="../static/github-mark-white.png" alt="github-logo" width="20px" height="20px">
+                    ahmadowais038</p>
+            </a>
+            <a href="https://www.linkedin.com/in/owais-ahmad-b70a63196/">
+                <p id="linkedin">
+                    <img src="../static/64px-LinkedIn_logo_initials.png" alt="linkedin-logo" width="20px" height="20px"> 
+                    Owais Ahmad
+                </p>
+            </a>
+            <a href="mailto:ahmadowais038@gmail.com">
+                <p id="email"><img src="../static/email.png" alt="email" width='20px' height='20px'>
+                    ahmadowais038@gmail.com</p>
+            </a>
+        </div>
     </div>
 </body>
 
